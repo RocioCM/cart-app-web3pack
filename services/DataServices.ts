@@ -1,5 +1,6 @@
 import {Product} from '@/types/product';
 import {ServiceResponse} from '@/types/service';
+import mockedData from '@/public/data.json';
 
 export class DataServices {
   /**
@@ -8,18 +9,12 @@ export class DataServices {
    */
   static async getProducts(): Promise<ServiceResponse<Product[]>> {
     try {
-      const response = await fetch('/data.json');
+      const products: Product[] = mockedData.map((item, i: number) => ({
+        ...item,
+        id: i + 1, // Create a unique ID for each product
+      }));
 
-      if (!response.ok) {
-        throw new Error(`HTTP error status: ${response.status}`);
-      }
-
-      const products: Product[] = await response.json();
-
-      return {
-        ok: true,
-        data: products,
-      };
+      return {ok: true, data: products};
     } catch (error) {
       console.error('Error fetching products:', error);
       return {
