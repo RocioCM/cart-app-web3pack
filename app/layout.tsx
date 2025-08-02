@@ -1,6 +1,7 @@
 import type {Metadata} from 'next';
 import {Red_Hat_Text} from 'next/font/google';
 import './globals.css';
+import 'animate.css';
 
 const redHatText = Red_Hat_Text({
   variable: '--font-red-hat-text',
